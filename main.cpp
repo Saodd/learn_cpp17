@@ -7,25 +7,41 @@
 using namespace std;
 
 class Rectangle {
-private:
+protected:
     int width;
     int height;
 
 public:
     Rectangle(int w, int h) : width(w), height(h) {
+        cout << "正在创建Rectangle " << this->width << ' ' << this->height << endl;
     }
 
     ~Rectangle() {
-        cout << "面积为" << this->Area() << "的Rectangle正在析构……";
+        cout << "正在析构Rectangle " << this->width << ' ' << this->height << endl;
     }
 
-    int Area() {
+    virtual int Area() {
         return this->width * this->height;
     }
 };
 
+class Square : public Rectangle {
+public:
+    Square(int w) : Rectangle(w, w) {
+        cout << "正在创建Square " << this->width << endl;
+    }
+
+    ~Square() {
+        cout << "正在析构Square " << this->width << endl;
+    }
+
+    int Area() override {
+        return this->width * this->width;
+    }
+};
+
 int main() {
-    Rectangle r(2, 4);
+    Square r(2);
     cout << r.Area() << endl;
 
     return 0;
