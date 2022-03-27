@@ -6,7 +6,21 @@
 
 using namespace std;
 
-class Rectangle {
+class Shape {
+public:
+    virtual int Area() = 0;
+};
+
+class Object {
+public:
+    virtual void speak() = 0;
+
+    virtual void hello() {
+        cout << "hello" << endl;
+    }
+};
+
+class Rectangle : public Shape {
 protected:
     int width;
     int height;
@@ -24,7 +38,7 @@ public:
         cout << "正在析构Rectangle " << this->width << ' ' << this->height << endl;
     }
 
-    virtual int Area() {
+    int Area() override {
         cout << "Rectangle Area" << endl;
         return this->width * this->height;
     }
@@ -35,7 +49,7 @@ public:
     }
 };
 
-class Square : public Rectangle {
+class Square : public Rectangle, public Object {
 public:
     Square(int w) : Rectangle(w, w) {
         cout << "正在创建Square " << this->width << endl;
@@ -50,6 +64,8 @@ public:
         return this->width * this->width;
     }
 
+    void speak() override {}
+
     Square operator+(Square &b) {
         Square r(this->width + b.width);
         return r;
@@ -57,10 +73,11 @@ public:
 };
 
 int main() {
-    Rectangle *ptr;
+    Shape *ptr;
 
     Rectangle r(2);
     Square s(1);
+    s.hello();
 
     ptr = &s;
     ptr->Area();
