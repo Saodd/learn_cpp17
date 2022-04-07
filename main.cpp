@@ -7,17 +7,33 @@
 
 using namespace std;
 
-struct MyException : public exception {
-    [[nodiscard]] const char *what() const noexcept override {
-        return "这是一个自定义异常";
+template<typename T>
+void mySort(T *array, int size) {
+    T temp;
+    for (int i = size - 1; i >= 0; i--) {
+        for (int j = 0; j < i; j++) {
+            if (array[j] > array[j + 1]) {
+                temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
     }
-};
+}
 
 
 int main() {
-    try {
-        throw MyException();
-    } catch (exception& e) {
-        cout << e.what() << endl;
+    int numbers[]{1, 4, 5, 2, 1};
+
+    for (int number: numbers) {
+        cout << number << ' ';
     }
+    cout << endl;
+
+    mySort(numbers, size(numbers));
+
+    for (int number: numbers) {
+        cout << number << ' ';
+    }
+    cout << endl;
 }
