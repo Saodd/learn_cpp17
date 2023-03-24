@@ -21,19 +21,19 @@ void mySort(T *array, int size) {
     }
 }
 
+class Mine {
+public:
+    int value;
+};
+
+template<typename T>
+void Sub(T &a, T &b) {
+    cout << a.v - b.v;
+}
+
 
 int main() {
-    int numbers[]{1, 4, 5, 2, 1};
-
-    for (int number: numbers) {
-        cout << number << ' ';
-    }
-    cout << endl;
-
-    mySort(numbers, size(numbers));
-
-    for (int number: numbers) {
-        cout << number << ' ';
-    }
-    cout << endl;
+    Mine a = Mine{1};
+    Mine b = Mine{2};
+    Sub(a, b);
 }
