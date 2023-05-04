@@ -1,25 +1,40 @@
 #include <iostream>
 #include <string>
-#include <ctime>
+#include <fstream>
+#include <filesystem>
+#include <cstring>
+
+using namespace std;
+
+#define DEBUG
 
 
-int main() {
-    std::srand(std::time(nullptr));
-    int rand_num = std::rand() % 100;
+const int BUFFER_SIZE = 1024;
 
-    do {
-        std::cout << "please guess a number: ";
-        char input[50];
-        std::cin >> input;
-        char *end_of_strtol = nullptr;
-        int guess_number = strtol(input, &end_of_strtol, 10);
-        if (guess_number == rand_num) {
-            std::cout << "you are right. the number is: " << rand_num;
-            return 0;
-        } else if (guess_number > rand_num) {
-            std::cout << "you guessed: " << guess_number << ", it's larger than my number!\n";
-        } else {
-            std::cout << "you guessed: " << guess_number << ", it's less than my number!\n";
+int main(int argc, char *argv[]) {
+#ifdef DEBUG
+    cout << "****当前工作路径: " << filesystem::current_path() << endl;
+    for (int i = 0; i < argc; ++i) {
+        cout << "****环境变量" << i << ": " << argv[i] << endl;
+    }
+#endif
+
+    if (argc != 3) {
+        cerr << "you should give exactly 3 args: execute_file search_file_path search_keyword";
+        exit(1);
+    }
+    char *filepath = argv[1];
+    auto keyword = argv[2];
+
+
+    ifstream file;
+    file.open(filepath);
+
+    char line[BUFFER_SIZE];
+    while (!file.eof()) {
+        file.getline(line, BUFFER_SIZE);
+        if (strstr(line, keyword) != nullptr) {
+            cout << line << endl;
         }
-    } while (true);
+    };
 }
