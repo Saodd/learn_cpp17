@@ -1,39 +1,25 @@
 #include <iostream>
-#include <cstring>
 #include <string>
 #include <ctime>
-#include <fstream>
-#include <exception>
-
-using namespace std;
-
-template<typename T>
-void mySort(T *array, int size) {
-    T temp;
-    for (int i = size - 1; i >= 0; i--) {
-        for (int j = 0; j < i; j++) {
-            if (array[j] > array[j + 1]) {
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-            }
-        }
-    }
-}
-
-class Mine {
-public:
-    int value;
-};
-
-template<typename T>
-void Sub(T &a, T &b) {
-    cout << a.v - b.v;
-}
 
 
 int main() {
-    Mine a = Mine{1};
-    Mine b = Mine{2};
-    Sub(a, b);
+    std::srand(std::time(nullptr));
+    int rand_num = std::rand() % 100;
+
+    do {
+        std::cout << "please guess a number: ";
+        char input[50];
+        std::cin >> input;
+        char *end_of_strtol = nullptr;
+        int guess_number = strtol(input, &end_of_strtol, 10);
+        if (guess_number == rand_num) {
+            std::cout << "you are right. the number is: " << rand_num;
+            return 0;
+        } else if (guess_number > rand_num) {
+            std::cout << "you guessed: " << guess_number << ", it's larger than my number!\n";
+        } else {
+            std::cout << "you guessed: " << guess_number << ", it's less than my number!\n";
+        }
+    } while (true);
 }
