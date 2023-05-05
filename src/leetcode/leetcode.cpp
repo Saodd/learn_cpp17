@@ -1,5 +1,7 @@
 #include "leetcode.h"
 
+#include <iostream>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -17,13 +19,16 @@ using namespace std;
    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     */
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
-    for (int i = 0; i < nums.size(); ++i) {
-        auto t = target - nums[i];
-        for (int j = i + 1; j < nums.size(); ++j) {
-            if (t == nums[j]) {
-                return {i, j};
-            }
+    auto size = nums.size();
+    unordered_map<int, int> mp;
+    for (int i = 0; i < size; ++i) {
+        auto num = nums[i];
+        auto t = target - num;
+        auto j = mp.find(t);
+        if (j != mp.end()) {
+            return {j->second, i};
         }
+        mp[num] = i;
     }
     return {};
 }
