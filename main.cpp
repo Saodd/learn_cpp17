@@ -1,40 +1,38 @@
+#include <vector>
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <filesystem>
-#include <cstring>
 
 using namespace std;
 
-#define DEBUG
+class Solution {
+public:
+    /*
+    给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+    你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+    你可以按任意顺序返回答案。
 
-
-const int BUFFER_SIZE = 1024;
-
-int main(int argc, char *argv[]) {
-#ifdef DEBUG
-    cout << "****当前工作路径: " << filesystem::current_path() << endl;
-    for (int i = 0; i < argc; ++i) {
-        cout << "****环境变量" << i << ": " << argv[i] << endl;
-    }
-#endif
-
-    if (argc != 3) {
-        cerr << "you should give exactly 3 args: execute_file search_file_path search_keyword";
-        exit(1);
-    }
-    char *filepath = argv[1];
-    auto keyword = argv[2];
-
-
-    ifstream file;
-    file.open(filepath);
-
-    char line[BUFFER_SIZE];
-    while (!file.eof()) {
-        file.getline(line, BUFFER_SIZE);
-        if (strstr(line, keyword) != nullptr) {
-            cout << line << endl;
+    来源：力扣（LeetCode）
+    链接：https://leetcode.cn/problems/two-sum
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    vector<int> twoSum(vector<int> &nums, int target) {
+        for (int i = 0; i < nums.size(); ++i) {
+            auto t = target - nums[i];
+            for (int j = i; j < nums.size(); ++j) {
+                if (t == nums[j]) {
+                    return {nums[i], nums[j]};
+                }
+            }
         }
-    };
+        return {};
+    }
+};
+
+
+int main() {
+    Solution s;
+    auto nums = vector<int>{2, 7, 11, 15};
+    auto result = s.twoSum(nums, 9);
+    for (auto num: result) {
+        cout << num << endl;
+    }
 }
