@@ -15,7 +15,7 @@ using namespace std;
 vector<int> Solution::twoSum(vector<int> &nums, int target) {
     for (int i = 0; i < nums.size(); ++i) {
         auto t = target - nums[i];
-        for (int j = i; j < nums.size(); ++j) {
+        for (int j = i + 1; j < nums.size(); ++j) {
             if (t == nums[j]) {
                 return {i, j};
             }
