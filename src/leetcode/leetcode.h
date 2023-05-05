@@ -9,8 +9,8 @@ using namespace std;
 #define LEARN_CPP17_LEETCODE_H
 
 class Solution {
-public:
+   public:
     vector<int> twoSum(vector<int> &nums, int target);
 };
 
-#endif //LEARN_CPP17_LEETCODE_H
+#endif  // LEARN_CPP17_LEETCODE_H
