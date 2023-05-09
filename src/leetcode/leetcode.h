@@ -1,6 +1,7 @@
 //
 // Created by LanLin on 2023/5/5.
 //
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -11,6 +12,7 @@ using namespace std;
 class Solution {
    public:
     vector<int> twoSum(vector<int> &nums, int target);
+    string longestPalindrome(string s);
 };
 
 #endif  // LEARN_CPP17_LEETCODE_H

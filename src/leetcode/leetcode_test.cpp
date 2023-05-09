@@ -16,8 +16,24 @@ TEST(q0001, EXAMPLES) {
         {{3, 3}, 6, {0, 1}},
     };
     Solution s;
-    for (auto ex : examples) {
+    for (auto& ex : examples) {
         auto output = s.twoSum(ex.nums, ex.target);
+        EXPECT_EQ(ex.answer, output);
+    }
+}
+
+TEST(q0005, EXAMPLES) {
+    struct Example {
+        string input;
+        string answer;
+    };
+    Example examples[] = {
+        {"babad", "bab"},
+        {"cbbd", "bb"},
+    };
+    Solution s;
+    for (const auto& ex : examples) {
+        auto output = s.longestPalindrome(ex.input);
         EXPECT_EQ(ex.answer, output);
     }
 }
