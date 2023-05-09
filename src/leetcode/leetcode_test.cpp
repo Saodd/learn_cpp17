@@ -37,3 +37,35 @@ TEST(q0005, EXAMPLES) {
         EXPECT_EQ(ex.answer, output);
     }
 }
+
+TEST(q0019, EXAMPLES) {
+    struct Example {
+        vector<int> input;
+        int n;
+        vector<int> answer;
+    };
+    Example examples[] = {
+        {
+            {1, 2, 3, 4, 5},
+            2,
+            {1, 2, 3, 5},
+        },
+        {
+            {1},
+            1,
+            {},
+        },
+        {
+            {1, 2},
+            1,
+            {1},
+        },
+    };
+    Solution s;
+    for (const auto& ex : examples) {
+        auto input = helper::buildListNode(ex.input);
+        auto output = s.removeNthFromEnd(input, ex.n);
+        auto answer = helper::buildListNode(ex.answer);
+        EXPECT_TRUE(helper::cmpList(output, answer));
+    }
+}

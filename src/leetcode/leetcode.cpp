@@ -48,8 +48,8 @@ vector<int> Solution::twoSum(vector<int> &nums, int target) {
  */
 string Solution::longestPalindrome(string s) {
     /**
-执行用时：1188 ms, 在所有 C++ 提交中击败了5.05%的用户
-内存消耗：6.7 MB, 在所有 C++ 提交中击败了84.67%的用户
+        执行用时：1188 ms, 在所有 C++ 提交中击败了5.05%的用户
+        内存消耗：6.7 MB, 在所有 C++ 提交中击败了84.67%的用户
      */
     auto left = 0;
     auto right = 0;
@@ -80,4 +80,39 @@ string Solution::longestPalindrome(string s) {
     }
 
     return s.substr(left, right - left + 1);
+}
+
+/**
+ * 19. 删除链表的倒数第 N 个结点
+ *
+ * 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+ *
+    提示：
+
+    链表中结点的数目为 sz
+        1 <= sz <= 30
+        0 <= Node.val <= 100
+        1 <= n <= sz
+ *
+ * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
+ */
+ListNode *Solution::removeNthFromEnd(ListNode *head, int n) {
+    /**
+     * 执行用时：4 ms, 在所有 C++ 提交中击败了77.16%的用户
+     * 内存消耗：10.3 MB, 在所有 C++ 提交中击败了89.18%的用户
+     */
+    ListNode dumb;
+    dumb.next = head;
+    auto left = &dumb;
+    auto right = &dumb;
+
+    for (int i = 0; i < n; ++i) {
+        right = right->next;
+    }
+    while (right->next != nullptr) {
+        right = right->next;
+        left = left->next;
+    }
+    left->next = left->next->next;  // n>=1
+    return dumb.next;
 }
